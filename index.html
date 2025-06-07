@@ -173,6 +173,18 @@ var init = function () {
 var s = document.readyState;
 if (s === 'complete' || s === 'loaded' || s === 'interactive') init();
 else document.addEventListener('DOMContentLoaded', init, false);
+ function enableAudioOnInteraction() {
+    const music = document.getElementById('bg-music');
+    music.play().catch(() => {
+      // Some browsers may still block it silently.
+      console.log("Autoplay blocked, user interaction required.");
+    });
+
+    // Remove the event listener after it plays
+    document.removeEventListener('click', enableAudioOnInteraction);
+  }
+
+  document.addEventListener('click', enableAudioOnInteraction);
 </script>
 <button style="
   position: fixed;
@@ -180,6 +192,9 @@ else document.addEventListener('DOMContentLoaded', init, false);
   left: 50%;
   transform: translateX(-50%);
 " onclick="window.location.href='AHH.html'">next</button>
+<audio id="bg-music" loop>
+  <source src="Anil Emre Daldal - M..mp3" type="audio/mpeg">
+</audio>
 
 </body>
 </html>
