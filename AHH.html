@@ -1380,5 +1380,22 @@ body {
   left: 50%;
   transform: translateX(-50%);
 " onclick="window.location.href='index.html'">back:3?</button>
+<audio id="bg-music" loop>
+  <source src="Anil Emre Daldal - M..mp3" type="audio/mpeg">
+</audio>
+<script>
+   function enableAudioOnInteraction() {
+    const music = document.getElementById('bg-music');
+    music.play().catch(() => {
+      // Some browsers may still block it silently.
+      console.log("Autoplay blocked, user interaction required.");
+    });
+
+    // Remove the event listener after it plays
+    document.removeEventListener('click', enableAudioOnInteraction);
+  }
+
+  document.addEventListener('click', enableAudioOnInteraction);
+</script>
 </body>
 </html>
